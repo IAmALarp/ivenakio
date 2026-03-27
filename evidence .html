@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ivenakio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #c0c0c0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+    border-bottom: 2px solid #8b0000;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: 42px;
+    color: #fff;
+    text-shadow: 0 0 20px #ff0033;
+    letter-spacing: 3px;
+}
+
+.center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.big-btn {
+    background: transparent;
+    border: 2px solid #8b0000;
+    color: #ff0033;
+    padding: 20px 50px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.big-btn:hover {
+    background: #8b0000;
+    color: #fff;
+    box-shadow: 0 0 20px #ff0033;
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+}
+
+.modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: #050505;
+    border: 1px solid #8b0000;
+    box-shadow: 0 0 20px #ff0033;
+}
+
+.close {
+    color: #ff0033;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.evidence-img {
+    width: 100%;
+    margin: 15px 0;
+    border: 1px solid #8b0000;
+}
+
+video.evidence-img {
+    max-height: 500px;
+}
+
+.label {
+    color: #ff0033;
+    font-size: 12px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="title">Ivenakio</div>
+</div>
+
+<div class="center">
+    <button class="big-btn" onclick="openEvidence([
+        'https://cdn.discordapp.com/attachments/1487163895708778590/1487167408811675838/FX35klJDx4N6LIxbJ6Hm7Q.mp4?ex=69c82814&is=69c6d694&hm=0cb0ac8c8a3c847ede4e71216440e723c553263e43e533cef1dcaf5c0c1926c4&',
+        'https://cdn.discordapp.com/attachments/1487163895708778590/1487167409642143814/UD80hu7I8B1w-EOXQelRCw_1.mp4?ex=69c82814&is=69c6d694&hm=92227572a7654e0de538ea6d57d6313672ad8c4c39915e5a6f2f9dcfe138305f&',
+
+
+
+
+
+    ])">
+        VIEW ALL EVIDENCE
+    </button>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="images"></div>
+    </div>
+</div>
+
+<script>
+function openEvidence(files) {
+    const container = document.getElementById("images");
+    container.innerHTML = "";
+
+    files.forEach((file, index) => {
+        const label = document.createElement("div");
+        label.className = "label";
+        label.innerText = "Evidence " + (index + 1);
+        container.appendChild(label);
+
+        if (file.includes(".mp4") || file.includes(".webm")) {
+            const video = document.createElement("video");
+            video.src = file;
+            video.controls = true;
+            video.className = "evidence-img";
+            container.appendChild(video);
+        } else {
+            const img = document.createElement("img");
+            img.src = file;
+            img.className = "evidence-img";
+            container.appendChild(img);
+        }
+    });
+
+    document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
